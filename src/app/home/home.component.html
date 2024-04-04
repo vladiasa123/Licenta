@@ -1,0 +1,20 @@
+<div class="firstCut">
+  <h1 class="firstTitle">
+    <strong class="strongText">Where</strong> Health Meets Heart: <br />Your
+    <strong class="strongText">Direct Line</strong> to Trusted Doctors.<br /><strong
+      class="subtitle"
+      >Prescription for Progress: Consult, Connect, Cure with Our Online
+      Clinic</strong
+    >
+  </h1>
+</div>
+<img class="doctorImage1" src="assets/doctor3.png" />
+<div class="card-container">
+  <app-doctor-card
+    *ngFor="let doctor of doctors"
+    [image]="doctor.image"
+    [Title]="doctor.title"
+    [description]="doctor.description"
+    [button]="doctor.button"
+  />
+</div>

@@ -1,0 +1,52 @@
+.circleIcon img {
+  display: flex;
+  width: 70px;
+  margin: auto 100px;
+}
+
+.circleIcon {
+  font-family: satoshi;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -70px;
+  justify-content: center;
+  border-radius: 15px;
+}
+
+.iconTitle h1 {
+  color: rgb(224, 59, 59);
+  font-size: 20px;
+}
+
+.iconTitle p {
+  text-align: center;
+  margin: 0;
+  top: -15;
+  font-size: 15px;
+}
+
+.iconTitle button {
+  font-family: satoshi;
+  letter-spacing: 1px;
+  transition: all 0.5s ease;
+  color: #ba2121;
+  border-radius: 30px;
+  width: 150px;
+  height: 50px;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1;
+  font-size: 12px;
+  background-color: rgb(239, 19, 19);
+  padding: 10px;
+  outline: none;
+  margin-top: 25px;
+  color: white;
+  border: 0px;
+}
+.iconTitle button:hover {
+  color: white;
+  background-color: #000000;
+}

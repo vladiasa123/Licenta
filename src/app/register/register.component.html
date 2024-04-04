@@ -1,0 +1,84 @@
+<form class="form">
+  <div class="leftSide">
+    <div class="leftSideTexts">
+      <h1>
+        Get checked by a doctor <br />
+        all day long
+      </h1>
+      <p>
+        View all your medical charts, make new appointments or talk to doctors
+        online
+      </p>
+      <h3>People joined : 350</h3>
+      <mat-progress-bar class="progressBar1" value="50"></mat-progress-bar>
+      <h3>Doctors joined : 150</h3>
+      <mat-progress-bar class="progressBar1" value="30"></mat-progress-bar>
+    </div>
+  </div>
+  <div class="rightSide">
+    <form class="registerForm">
+      <h1>Create an account</h1>
+      <div class="radioButtons">
+        <label class="radio-button" [class.clicked]="clicked">
+          <input
+            (click)="toggleActive()"
+            type="radio"
+            name="accountType"
+            value="doctor"
+          />
+          <span><fa-icon class="fa-icon" [icon]="medical"></fa-icon>Firm</span>
+        </label>
+        <label class="radio-button" [class.clicked1]="clicked1">
+          <input
+            (click)="toggleActive1()"
+            type="radio"
+            name="accountType"
+            value="client"
+          />
+          <span>Personal</span>
+        </label>
+      </div>
+      <input
+        class="firstName"
+        type="text"
+        name="firstName"
+        value="first name"
+      />
+      <input
+        class="firstName"
+        type="text"
+        name="firstName"
+        value="second name"
+      />
+      <select class="selectBloodType">
+        <option value="" selected disabled hidden>blood type</option>
+        <option value="A+">A+</option>
+        <option value="A+">A-</option>
+        <option value="A+">B+</option>
+        <option value="A+">B-</option>
+        <option value="A+">O+</option>
+        <option value="A+">O-</option>
+        <option value="A+">AB+</option>
+        <option value="A+">AB-</option>
+      </select>
+      <input
+        class="dateInput"
+        type="text"
+        id="myDate"
+        name="myDate"
+        value="Enter Date"
+        onfocus="(this.type='date')"
+        onblur="(this.type='text')"
+        onchange="this.style.color = 'black';"
+      />
+      <input
+        class="firstName"
+        type="password"
+        name="firstName"
+        value="first name"
+      />
+
+      <button class="submitButton">Submit</button>
+    </form>
+  </div>
+</form>

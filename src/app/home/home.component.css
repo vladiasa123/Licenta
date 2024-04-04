@@ -1,0 +1,52 @@
+.card-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.firstCut {
+  display: flex;
+  position: relative;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(217, 153, 171, 1) 0%,
+    rgba(176, 68, 68, 1) 100%
+  );
+  width: 100%;
+  height: 200px;
+  top: 100;
+  left: 0;
+  right: 200;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.firstTitle {
+  font-family: SatoshiLight;
+  vertical-align: middle;
+}
+
+.doctorImage1 {
+  position: relative;
+  width: 250px;
+  top: -110px;
+  left: calc(50% - 600px);
+
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
+}
+
+.strongText {
+  font-family: Satoshi;
+}
+
+.subtitle {
+  font-size: 20px;
+}
+
+.containerUp {
+  pointer-events: none;
+}

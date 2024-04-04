@@ -1,0 +1,37 @@
+<div class="body">
+  <nav class="navigationBar">
+    <div class="Register">
+      <button routerLink="register" class="RegistrationButton" href="home">
+        Register
+      </button>
+    </div>
+    <img src="assets/LOGO.png" class="logo" />
+    <div class="itemMenu">
+      <button routerLink="home" class="homeButton">Home</button>
+      <button class="contactButton">Contact</button>
+      <button class="aboutButton">About</button>
+    </div>
+  </nav>
+</div>
+<router-outlet></router-outlet>
+<footer>
+  <div class="greyBorder">
+    <button class="gitButton"><fa-icon [icon]="git"></fa-icon></button>
+    <button class="xButton"><fa-icon [icon]="x"></fa-icon></button>
+    <button class="linkedinButton">
+      <fa-icon [icon]="linkedin"></fa-icon>
+    </button>
+    <button class="facebookButton">
+      <fa-icon [icon]="facebook"></fa-icon>
+    </button>
+  </div>
+  <div class="wholeFooter">
+    <div class="secondBox">
+      <h1>
+        The new medical website <br />
+        available 24/7®
+      </h1>
+      <h3>Romania</h3>
+    </div>
+  </div>
+</footer>
