@@ -6,10 +6,11 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrl: './doctor-card.component.css',
 })
 export class DoctorCardComponent {
-  @Input() image = 'src';
+  @Input() image = '';
   @Input() Title = '';
   @Input() description = '';
   @Input() button = '';
+  @Input() buttonLink = '';
   backgroundImageUrl: string =
     'C:UsersHPDesktopProiectele meleLICENTAsrcappdoctor-cardProfile1.jpg';
   onMouseOver: boolean = false;

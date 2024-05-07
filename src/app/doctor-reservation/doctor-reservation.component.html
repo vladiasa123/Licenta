@@ -1,0 +1,11 @@
+<h1 class="title">Choose the doctor to speak to</h1>
+
+<div class="doctors-container">
+    <app-doctors class="doctors"
+      *ngFor="let employee of employees"
+      [image]="employee.image"
+      [title]="employee.FirstName"
+      [subtitle]="employee.lastName"
+      [description]="employee.DoctorType">
+    </app-doctors>
+  </div>

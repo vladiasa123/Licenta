@@ -1,0 +1,61 @@
+.bigDiv {
+    font-family: SatoshiLight;
+    border: 0px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    width: 1000px;
+    height: auto;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+.smallDiv {
+    font-family: SatoshiLight;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    text-align: center;
+    color: black;
+    transition: 0.2s;
+    position: relative; 
+    
+}
+
+.smallDivContainer{
+   padding-bottom: 20px;
+}
+.smallDiv:hover {
+    background-color: #B4E7ED;
+}
+
+.hover-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0; 
+    transition: opacity 0.3s ease;
+    font-family: Satoshi;
+    color: white;
+}
+
+.smallDiv:hover .hover-text {
+    opacity: 1; 
+}
+
+.smallDiv h3 {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.smallDiv:hover h3 {
+    opacity: 0;
+}

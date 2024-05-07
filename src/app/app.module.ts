@@ -11,11 +11,48 @@ import { RegisterComponent } from './register/register.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatError, MatFormField } from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DoctorReservationComponent } from './doctor-reservation/doctor-reservation.component';
+import { LoginComponent } from './login/login.component';
+import { DoctorsComponent } from './doctors/doctors.component';
+import { RegisterDoctorComponent } from './register-doctor/register-doctor.component';
+import { LoginDoctorComponent } from './login-doctor/login-doctor.component';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { LoginSuccesfullComponent } from './login-succesfull/login-succesfull.component';
+import { provideLottieOptions } from 'ngx-lottie';
+import player from 'lottie-web';
+import {MDCFormField} from '@material/form-field';
+import {MDCCheckbox} from '@material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MedicalChartComponent } from './medical-chart/medical-chart.component';
+import { MedicalFormCompletitionComponent } from './medical-form-completition/medical-form-completition.component';
+import { ContactComponent } from './contact/contact.component';
+import { AuthInterceptor } from './auth.interceptor';
+import { MyWrittenFormsComponent } from './my-written-forms/my-written-forms.component';
+
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'doctor-reservation', component: DoctorReservationComponent   },
+  { path: 'login', component: LoginComponent},
+  { path: 'doctors', component: DoctorsComponent},
+  { path: 'doctor-reservation', component: DoctorReservationComponent},
+  { path: 'register-doctor', component: RegisterDoctorComponent},
+  { path: 'loginDoctor', component: LoginDoctorComponent},
+  {path: 'loginSuccesfull', component: LoginSuccesfullComponent},
+  {path: 'medicalChart', component: MedicalChartComponent},
+  {path: 'medicalForm', component: MedicalFormCompletitionComponent},
+  {path: 'contact', component: ContactComponent},
+  {path: 'writtenForms', component: MyWrittenFormsComponent}
+  
+
 ];
 
 @NgModule({
@@ -24,15 +61,44 @@ const routes: Routes = [
     DoctorCardComponent,
     RegisterComponent,
     HomeComponent,
+    DoctorReservationComponent,
+    LoginComponent,
+    DoctorsComponent,
+    RegisterDoctorComponent,
+    LoginDoctorComponent,
+    LoginSuccesfullComponent,
+    LoginSuccesfullComponent,
+    MedicalChartComponent,
+    MedicalFormCompletitionComponent,
+    ContactComponent,
+    MyWrittenFormsComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
     MatIconModule,
+    ReactiveFormsModule,
+    
+    FormsModule,
     FontAwesomeModule,
-    MatProgressBarModule,
+    CommonModule,
+    HttpClientModule,
+    MatFormField,
+    MatError,
+    MatInputModule,
+    MatFormFieldModule,
+    MatProgressBarModule
+
+    
   ],
-  providers: [provideAnimationsAsync()],
+  providers: [provideAnimationsAsync(), provideLottieOptions({
+    player: () => import('lottie-web'),
+  }),
+  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent],
+
+  
 })
-export class AppModule {}
+export class AppModule {
+  
+}

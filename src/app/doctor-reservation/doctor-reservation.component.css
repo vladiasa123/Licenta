@@ -1,0 +1,18 @@
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust if needed */
+  }
+
+  .doctors-container {
+    display: flex; /* Or any other desired spacing */
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .title{
+    text-align: center;
+    padding: 30px;
+    font-family: satoshi;
+  }

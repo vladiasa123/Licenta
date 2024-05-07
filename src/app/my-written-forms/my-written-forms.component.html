@@ -1,0 +1,9 @@
+<div class="bigDiv">
+    <h1>My Charts</h1>
+    <div class="smallDivContainer">
+    <div class="smallDiv" *ngFor="let patients of patient">
+        <h3 [routerLink]="['/medicalChart', patients.id]">{{patients.name}}</h3>
+        <div class="hover-text">EDIT CHART</div> 
+    </div>
+    </div>
+</div>

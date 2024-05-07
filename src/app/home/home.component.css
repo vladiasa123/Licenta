@@ -50,3 +50,68 @@
 .containerUp {
   pointer-events: none;
 }
+
+
+.first3DModelRow{
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.first3DModelRow img{
+  width: 30% ;
+  height: 100%;
+  margin-top: 100px;
+}
+
+.ModelImage{
+  display: flex;
+  margin-left: auto;
+}
+
+.informativeBoxes1{
+  margin-right: 100px;
+  margin-top: 100px;
+}
+
+.informativeBoxes2{
+  margin-right: 50x;
+  margin-top: 100px;
+}
+
+
+.informativeBoxes1 div{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 25px;
+  margin: 10px;
+  width:300px;
+  height: 169px;
+  transition: transform .2s;
+}
+
+.informativeBoxes2 div{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 25px;
+  margin: 10px;
+  width:300px;
+  height: 169px;
+  transition: transform .2s;
+  background-image: url('normalbackground.png');
+  background-size: 400px;
+  
+}
+
+.informativeBoxes2 div:hover{
+  transform: scale(1.5);
+  background: url('https://media.giphy.com/media/NsDgJPXkk5CK7pPYkJ/giphy.gif?cid=790b7611q9zle1umpzrgevdrnpi7r4l6sun4xk295bza6ny8&ep=v1_gifs_search&rid=giphy.gif&ct=g') no-repeat center center;
+  background-size: contain;
+}
+
+.informativeBoxes1 div:hover{
+  transform: scale(1.5);
+}
+
+
+
+
+
+

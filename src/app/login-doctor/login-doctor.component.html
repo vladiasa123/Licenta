@@ -1,0 +1,37 @@
+<form  class="Form" [formGroup]="loginDoctorForm">
+    <div class="leftSide">
+      <div class="leftSideTexts">
+        <h1>
+          Get checked by a doctor <br />
+          all day long
+        </h1>
+        <p>
+          View all your medical charts, make new appointments or talk to doctors
+          online
+        </p>
+        <h3>People joined : 350</h3>
+        <mat-progress-bar class="progressBar1" value="50"></mat-progress-bar>
+        <h3>Doctors joined : 150</h3>
+        <mat-progress-bar class="progressBar1" value="30"></mat-progress-bar>
+      </div>
+    </div>
+    <div class="rightSide">
+      <div class="loginForm">
+        <h1>Log in</h1>
+        <input
+        class="firstName"
+        type="text"
+        name="email"
+        value="email"
+        formControlName="email"
+      />
+      <input
+        class="firstName"
+        type="password"
+        formControlName="password"
+      />
+        <button class="submitButton" (click)="submitLogInDoctor()" routerLink="/loginSuccesfull">Log in</button>
+      </div>
+    </div>
+  </form>
+  
