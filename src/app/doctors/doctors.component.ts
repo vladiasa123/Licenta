@@ -11,11 +11,11 @@ import { DoctorService } from '../service/doctor.service';
   styleUrl: './doctors.component.css'
 })
 export class DoctorsComponent implements OnInit{
- @Input() image: string|undefined = 'src';
- @Input() title = '';
- @Input() subtitle = '';
- @Input() description = '';
- public employees: employee[] = [];
+  @Input() image!: string | undefined;
+  @Input() firstName!: string | undefined;
+  @Input() doctorType!: string | undefined;
+  @Input() description!: string;;
+ public doctors: Doctor[] = [];
 
  
 

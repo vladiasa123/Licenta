@@ -1,11 +1,50 @@
 <h1 class="title">Choose the doctor to speak to</h1>
-
+<div class="radio-inputs">  
+  <label class="radio">
+    <input type="radio" name="radio" value="All">
+    <span class="name">All</span>
+  </label>
+  <label class="radio">
+    <input type="radio" name="radio"  value="Pediatrician" (click)="loadDoctors('Pediatrician')">
+    <span class="name">Pediatrician</span>
+  </label>
+  <label class="radio">
+    <input type="radio" name="radio"  value="Dermatologist" (click)="loadDoctors('Dermatologist')">
+    <span class="name">Dermatologist</span>
+  </label>
+      
+  <label class="radio">
+    <input type="radio" name="radio"  value="Cardiologist" (click)="loadDoctors('Cardiologist')">
+    <span class="name">Cardiologist</span>
+  </label>
+  <label class="radio">
+    <input type="radio" name="radio"  value="Surgeon" (click)="loadDoctors('Surgeon')">
+    <span class="name">Surgeon</span>
+  </label>
+  <label class="radio">
+    <input type="radio" name="radio"  value="Pshyciatrist" (click)="loadDoctors('Pshyciatrist')">
+    <span class="name">Pshyciatrist</span>
+  </label>
+  <label class="radio">
+    <input type="radio" name="radio"  value="Gynecologist"(click)="loadDoctors('Gynecologist')">
+    <span class="name">Gynecologist</span>
+  </label>
+  <label class="radio">
+    <input type="radio" name="radio" value="Opthalmologist" (click)="loadDoctors('Opthalmologist')">
+    <span class="name">Opthalmologist</span>
+  </label>
+  <label class="radio">
+    <input type="radio" name="radio"  value="Urologist" (click)="loadDoctors('Urologist')">
+    <span class="name">Urologist</span>
+  </label>
+</div> 
 <div class="doctors-container">
     <app-doctors class="doctors"
-      *ngFor="let employee of employees"
-      [image]="employee.image"
-      [title]="employee.FirstName"
-      [subtitle]="employee.lastName"
-      [description]="employee.DoctorType">
+      *ngFor="let doctor of doctors"
+      [image]="doctor.image"
+      [firstName]="doctor.firstName"
+      [doctorType]="doctor.doctorType"
+      (click)="sendDoctorIdToBackend(doctor?.id)"
+      >
     </app-doctors>
-  </div>
+</div>

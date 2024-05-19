@@ -7,6 +7,7 @@ import { DoctorService } from '../service/doctor.service';
 import { HttpClient } from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,18 +19,25 @@ export class RegisterDoctorComponent {
 
   registerDoctorForm!: FormGroup;
 
+
   constructor(private doctorService: DoctorService,
     private readonly formBuilder: FormBuilder,
-    private readonly cdRef: ChangeDetectorRef
+    private readonly cdRef: ChangeDetectorRef,
+    private router: Router
   ){
 
   }
+
+
 
   show(){
     Swal.fire({
       title: "Good job!",
       text: "You succesfully registered!",
       icon: "success"
+    }).then(() => {
+      console.log("Redirecting...");
+      this.router.navigate(['/loginDoctor']).then(); 
     });
   }
 
@@ -62,7 +70,7 @@ isUploaded = false;
       'password': ['', [Validators.required]],
       'email' : ['', [Validators.required]],
       'faculty' : ['', [Validators.required]],
-      'DoctorType' : ['', [Validators.required]],
+      'doctorType' : ['', [Validators.required]],
       'image' : ['', [Validators.required]]
 
     
@@ -72,8 +80,15 @@ isUploaded = false;
   handleFileInput(event: any): void {
     
 }
+navigateToRegister() {
+  this.router.navigate(['/register']);
+}
 
+navigateTologin() {
+  this.router.navigate(['/login']);
+}
   
+
   uploadFile(event: any){
     const formData = new FormData();
     if(this.registerDoctorForm.valid) {

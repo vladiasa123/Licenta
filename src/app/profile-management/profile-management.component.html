@@ -1,0 +1,30 @@
+<body>
+    <div class="container">
+      <div class="sidebar">
+        <h2>Sidebar</h2>
+        <p>Links and navigation here...</p>
+      </div>
+      <div class="profile">
+        <div class="profile-header">
+          <div class="profile-picture">
+            <img src="https://via.placeholder.com/150" alt="Profile Picture">
+          </div>
+          <div class="profile-info">
+            <h2>Name: {{user?.FirstName}} {{user?.SecondName}}</h2>
+            <p>Email: {{user?.email}}</p>
+            <p>Blood Type:  {{user?.BloodType}} </p>
+          </div>
+        </div>
+        
+        <div class="profile-form">
+          <h2>Edit Profile</h2>
+          <form [formGroup]="myGroup">
+            <input type="text" placeholder="First Name" formControlName="FirstName">
+            <input type="email" placeholder="Second Name" formControlName="SecondName">
+            <input type="text" placeholder="Email" formControlName="Email">
+            <button type="submit" (click)="updateUser()">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div> 
+  </body>

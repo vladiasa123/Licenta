@@ -21,6 +21,10 @@ export class PatientService {
     return this.http.get<Patient>(`${this.api2}/medicalChart.php`);
   }
 
+  getMedicalChartDetailsDoctor(queryParamsId: any): Observable<Patient>{
+    return this.http.get<Patient>(`${this.api2}/medicalChartDoctor.php?id=${queryParamsId}`);
+  }
+
   getMedicalChartNames(): Observable<Patient[]>{
     return this.http.get<Patient[]>(`${this.api4}/getNames.php`);
   }
@@ -31,6 +35,10 @@ export class PatientService {
   
   uploadFile(formData: FormData): Observable<Patient>{
     return this.http.post<Patient>(`${this.api}/medicalForm.php`, formData);
+  }
+
+  sendNames(patientName: number): Observable<void>{
+   return this.http.get<void>(`${this.api3}/medicalChartDoctor.php?id=${patientName}`);
   }
 
   createPatient(patient: Patient): Observable<Patient>{

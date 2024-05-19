@@ -11,7 +11,6 @@ if (! preg_match('/Bearer\s(\S+)/', $_SERVER['HTTP_AUTHORIZATION'], $matches)) {
 
 $jwt = $matches[1];
 if (! $jwt) {
-    // No token was able to be extracted from the authorization header
     header('HTTP/1.0 400 Bad Request');
     exit;
 }
@@ -20,6 +19,9 @@ $secretKey  = 'bGS6lzFqvvSQ8ALbOxatm7/Vk7mLQyzqaS34Q4oR1ew=';
 $token = JWT::decode($jwt, new Key($secretKey, 'HS256'));
 $now = new DateTimeImmutable();
 $serverName = "localhost";
+
+
+
 
 if ($token->iss !== $serverName ||
     $token->exp < $now->getTimestamp())
@@ -41,5 +43,21 @@ function getCurrentUserEmail() {
     $token = JWT::decode($jwt, new Key($secretKey, 'HS256'));
     return $token->data->userEmail;
 }
+
+function getCurrentUserId() {
+    if (! preg_match('/Bearer\s(\S+)/', $_SERVER['HTTP_AUTHORIZATION'], $matches)) {
+        header('HTTP/1.0 400 Bad Request');
+        echo 'Token not found in request';
+        exit;
+    }
+    
+    $jwt = $matches[1];
+    
+    $secretKey  = 'bGS6lzFqvvSQ8ALbOxatm7/Vk7mLQyzqaS34Q4oR1ew=';
+    $token = JWT::decode($jwt, new Key($secretKey, 'HS256'));
+    return $token->data->id;
+}
+
+
 
 ?>

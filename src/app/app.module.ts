@@ -33,6 +33,9 @@ import { MedicalFormCompletitionComponent } from './medical-form-completition/me
 import { ContactComponent } from './contact/contact.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { MyWrittenFormsComponent } from './my-written-forms/my-written-forms.component';
+import { Error403Component } from './error403/error403.component';
+import { ProfileManagementComponent } from './profile-management/profile-management.component';
+import { DoctorAppointmentComponent } from './doctor-appointment/doctor-appointment.component';
 
 
 
@@ -50,8 +53,10 @@ const routes: Routes = [
   {path: 'medicalChart', component: MedicalChartComponent},
   {path: 'medicalForm', component: MedicalFormCompletitionComponent},
   {path: 'contact', component: ContactComponent},
-  {path: 'writtenForms', component: MyWrittenFormsComponent}
-  
+  {path: 'writtenForms', component: MyWrittenFormsComponent},
+  {path: 'error403', component: Error403Component},
+  {path: 'profileManagement', component: ProfileManagementComponent},
+  {path: 'doctorAppointment', component: DoctorAppointmentComponent}
 
 ];
 
@@ -72,6 +77,9 @@ const routes: Routes = [
     MedicalFormCompletitionComponent,
     ContactComponent,
     MyWrittenFormsComponent,
+    Error403Component,
+    ProfileManagementComponent,
+    DoctorAppointmentComponent,
   ],
   imports: [
     BrowserModule,

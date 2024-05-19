@@ -4,6 +4,7 @@ import { UserService } from '../service/user.service';
 import {User} from '../interface/user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,17 +16,29 @@ export class RegisterComponent {
   clicked: boolean = false;
   clicked1: boolean = false;
 
+  navigateToRegister() {
+    this.router.navigate(['/register-doctor']);
+  }
+
+  navigateTologin() {
+    this.router.navigate(['/login']);
+  }
+
   registerForm!: FormGroup;
   show(){
     Swal.fire({
       title: "Good job!",
       text: "You succesfully registered!",
       icon: "success"
+    }).then(() => {
+      console.log("Redirecting...");
+      this.router.navigate(['/login']).then(); 
+      window.location.reload()
     });
   }
-
   constructor(private userService: UserService,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private router: Router
   ){
 
   }

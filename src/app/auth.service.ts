@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   loginUser(user: User): Observable<User>{
-    return this.http.post<User>(`${this.apiLogin}/login.php`, user)
+    return this.http.post<User>(`${this.apiLogin2}`, user)
       .pipe(map(response => {
         localStorage.setItem('token', JSON.stringify(response));
         this.loggedUserSubject.next(response);
@@ -43,7 +43,10 @@ export class AuthService {
   }
   
   logoutUser() {
-      localStorage.removeItem('loggedInUser');
+      localStorage.removeItem('token');
+      localStorage.removeItem('email_adress');
+      localStorage.removeItem('expiry');
+      localStorage.removeItem('message');
       this.loggedUserSubject.next(null);
   }
   public get loggedInUserValue(){

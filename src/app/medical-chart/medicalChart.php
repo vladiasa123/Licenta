@@ -32,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 require 'C:\xamppp\htdocs\Licenta\src\app\auth.php';
 $email = getCurrentUserEmail();
 
+
+
 /*
 FROM THIS DOWN IS THE DATABASE RELATED STUFF
 ////

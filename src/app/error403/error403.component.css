@@ -1,0 +1,30 @@
+.forbidden-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* This will make the container take up the full height of the viewport */
+}
+
+h1 {
+    color: red;
+    font-size: 3em;
+    margin-bottom: 20px; /* Add some space below the heading */
+}
+
+p {
+    font-size: 1.2em;
+}
+
+button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+button:hover 
+    background-color: #red;
+}

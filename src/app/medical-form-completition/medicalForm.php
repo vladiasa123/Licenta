@@ -62,27 +62,32 @@ $db_pass = 'darius2vlad';
 $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 
 
-$SQL = "INSERT INTO medicalForm (DoctorEmail, name,email,gender, diagnosis, allergies, medication, date, procedures, notes)
-VALUES (?, ?, ?, ? ,?, ?,?, ?,?,?)";
+$emailExistsSQL = "SELECT * FROM medicalForm WHERE email = ?";
+$emailExistsStmt = mysqli_prepare($conn, $emailExistsSQL);
+mysqli_stmt_bind_param($emailExistsStmt, 's', $email);
+mysqli_stmt_execute($emailExistsStmt);
+mysqli_stmt_store_result($emailExistsStmt);
+$emailExists = mysqli_stmt_num_rows($emailExistsStmt) > 0;
 
-$stmt = mysqli_prepare($conn, $SQL);
+if ($emailExists) {
+    echo "Email already exists.";
+} else {
+    $insertSQL = "INSERT INTO medicalForm (DoctorEmail, name,email,gender, diagnosis, allergies, medication, date, procedures, notes)
+    VALUES (?, ?, ?, ? ,?, ?,?, ?,?,?)";
 
-mysqli_stmt_bind_param($stmt, 'ssssssssss', $DoctorEmail, $name,$email,$gender, $diagnosis, $allergies, $medication, $date, $procedures, $notes);
+    $insertStmt = mysqli_prepare($conn, $insertSQL);
+    mysqli_stmt_bind_param($insertStmt, 'ssssssssss', $DoctorEmail, $name,$email,$gender, $diagnosis, $allergies, $medication, $date, $procedures, $notes);
 
+    $results = mysqli_stmt_execute($insertStmt);
 
-$results = mysqli_stmt_execute($stmt);
-
-if(!$results){
-    echo mysqli_stmt_error($stmt);
-}else{
-    echo 'Records inserted succesfully';
+    if(!$results){
+        echo mysqli_stmt_error($insertStmt);
+    } else {
+        echo 'Records inserted successfully';
+    }
 }
 
-
-
-
-
-
+mysqli_close($conn);
 
 
 

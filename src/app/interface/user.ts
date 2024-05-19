@@ -1,3 +1,5 @@
+import { StringLiteral } from "typescript";
+
 export interface User {
     password?: String;
     FirstName?: String;
@@ -5,4 +7,6 @@ export interface User {
     BloodType?: String;
     DateOfBirth?: Date;
     email?: String;
+    requests?: String;
+    problem?: String;
 }

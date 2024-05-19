@@ -1,16 +1,16 @@
  <div class="body">
   <nav class="navigationBar" *ngIf="showHeader">
     <div class="dropdown" *ngIf="!loggedIn">
-      <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
+      <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My account</button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item "href="#">Link 1</a>
-        <a  class="dropdown-item" href="#">Link 2</a>
-        <a  class="dropdown-item"  href="#">Link 3</a>
+        <a class="dropdown-item "href="/writtenForms">My forms</a>
+        <a  class="dropdown-item" href="profileManagement">My Profile</a>
+          <button (click)="confirmDelete()" class="logoutbutton">Log Out</button>
       </div>
     </div>
     <div class="Register" *ngIf="loggedIn">
-      <button routerLink="register" class="RegistrationButton">
-        Register
+      <button routerLink="login" class="RegistrationButton">
+        Sign up
       </button>
     </div>
     <img src="assets/LOGO.png" class="logo" />

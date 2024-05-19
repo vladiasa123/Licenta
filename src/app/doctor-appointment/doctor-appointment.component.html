@@ -1,0 +1,30 @@
+<form class="form" [formGroup]="appointmentForm">
+    <p class="title">Make an appointment </p>
+    <p class="message">Write the details below</p>
+        <div class="flex">
+        <label>
+            <input required="" placeholder="" type="text" class="input" formControlName="firstName">
+            <span>Firstname</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="text" class="input" formControlName="lastName">
+            <span>Lastname</span>
+        </label>
+    </div>  
+            
+    <label>
+        <input required="" placeholder="" type="email" class="input" formControlName="email">
+        <span>Email</span>
+    </label> 
+        
+    <label>
+        <input required="" placeholder="" type="text" class="input" formControlName="problem">
+        <span>What is wrong</span>
+    </label>
+    <label>
+        <input required="" placeholder="" type="text" class="input" formControlName="requests">
+        <span>Other requests</span>
+    </label>
+    <button class="submit" (click)="submitForm()">Submit</button>
+</form>

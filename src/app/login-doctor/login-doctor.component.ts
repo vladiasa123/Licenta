@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Doctor } from '../interface/doctor';
 import { DoctorService } from '../service/doctor.service';
 import { AuthService } from '../auth.service';
+import Swal from 'sweetalert2';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-doctor',
@@ -14,13 +16,38 @@ export class LoginDoctorComponent {
   loginDoctorForm!: FormGroup;
 
   constructor(private authService: AuthService,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private router: Router
   ){
 
   }
 
+  navigateToRegister() {
+    this.router.navigate(['/register']);
+  }
+
+  navigateToUser() {
+    this.router.navigate(['/login']);
+  }
+
   ngOnInit(): void{
     this.initForm();
+  }
+
+  success() {
+    Swal.fire({
+      title: "Good job!",
+      text: "You successfully logged in!",
+      icon: "success"
+    }).then(() => {
+      console.log("Redirecting...");
+      this.router.navigate(['/home']).then(() => {
+        setTimeout(() => {
+          console.log("Reloading...");
+          window.location.reload();
+        }, 500); 
+      }); 
+    });
   }
 
 

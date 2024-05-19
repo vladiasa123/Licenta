@@ -199,3 +199,12 @@ html {
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
 }
+
+.logoutbutton{
+  width: 180px;
+  border: 0px;
+  color: white ;
+  background: red;
+  height: 30px;
+  font-family: Satoshi;
+}

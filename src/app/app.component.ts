@@ -16,6 +16,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import {constructorParametersDownlevelTransform} from "@angular/compiler-cli";
 import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -36,6 +37,7 @@ export class AppComponent {
   registerFormGroup!: FormGroup;
   showHeader: boolean = true;
   showFooter: boolean = true;
+  showConfirmation = false;
   show(){
     Swal.fire({
       title: "Good job!",
@@ -44,10 +46,31 @@ export class AppComponent {
     });
   }
 
+  confirmDelete() {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.auth.logoutUser();
+        console.log("Redirecting...");
+      this.router.navigate(['/home']).then();
+      window.location.reload()
+      }
+    });
+  }
+
+
 
   constructor(private userService: UserService,
     private readonly formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    public auth: AuthService
   ){
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -61,10 +84,17 @@ export class AppComponent {
     }
   }
 
+  
+
   private checkRoute(url: string) {
   
-    this.showHeader = !url.startsWith('/register');
-    this.showFooter = !url.startsWith('/register');
+    if (url.startsWith('/register') || url.startsWith('/registerDoctor') || url.startsWith('/error403') || url.startsWith('/loginDoctor') || url.startsWith('/login') || url.startsWith('/doctorAppointment')) {
+      this.showHeader = false;
+      this.showFooter = false;
+    } else {
+      this.showHeader = true;
+      this.showFooter = true;
+    }
   }
 
 }

@@ -1,10 +1,10 @@
 export interface Doctor {
-
-    password?: String;
-    FirstName?: String;
-    SecondName?: String;
-    email?: String;
-    DoctorType?: String;
-    faculty?: String;
+    id?: number;
+    password?: string;
+    firstName?: string;
+    secondName?: string;
+    email?: string;
+    doctorType?: string;
+    faculty?: string;
     image?:any;
 }

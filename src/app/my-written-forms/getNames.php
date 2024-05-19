@@ -41,6 +41,9 @@ FROM THIS DOWN IS THE DATABASE RELATED STUFF
 */
 
 
+
+
+
 $db_host = 'localhost';
 $db_name = 'licenta';
 $db_user = 'vladiasa';

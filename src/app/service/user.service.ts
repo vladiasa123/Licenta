@@ -11,6 +11,8 @@ export class UserService {
 
 private api1 = 'http://localhost/Licenta/src/app/register';
 private api2= 'http://localhost/Licenta/src/app/login';
+private api3 = 'http://localhost/Licenta/src/app/profile-management';
+private api4 = 'http://localhost/Licenta/src/app/doctor-appointment';
 
 
   constructor(private http: HttpClient) { }
@@ -23,6 +25,16 @@ private api2= 'http://localhost/Licenta/src/app/login';
   loginUser(user: User): Observable<User>{
     return this.http.post<User>(`${this.api2}/login.php`, user);
   } 
+
+  
+
+  getUser(): Observable<User>{
+    return this.http.get<User>(`${this.api3}/getUser.php`)
+  }
+
+  updateUser(updatedData: any): Observable<void>{
+    return this.http.put<void>(`${this.api3}/updateUser.php`, updatedData)
+  }
 
  
 

@@ -17,17 +17,20 @@ export class DoctorService {
 
   private _url: string = "http://localhost/Licenta/src/app/doctor-reservation/doctor.php"
 
-  getEmployees(): Observable<employee[]>{
-    return this.http.get<employee[]>(this._url);
+  getEmployees(doctorType: any): Observable<Doctor[]> {
+    return this.http.get<Doctor[]>(`${this._url}/doctor.php?doctorType=${doctorType}`);
   }
 
-
-  registerDoctor(doctor: Doctor): Observable<Doctor>{
-    return this.http.post<Doctor>(`${this.api3}/register-doctor.php`, doctor);
-  } 
-
+  getDoctor(doctorId: any): Observable<Doctor[]> {
+    return this.http.get<Doctor[]>(`${this._url}/doctor.php?doctorId=${doctorId}`);
+  }
+  
   uploadFile(formData: FormData): Observable<employee[]>{
     return this.http.post<employee[]>('http://localhost/Licenta/src/app/register-doctor/register-doctor.php', formData);
+  }
+
+  uploadPatientName(formData: FormData): Observable<employee[]>{
+    return this.http.post<employee[]>('http://localhost/Licenta/src/app/my-written-forms/getNames.php', formData);
   }
 
   loginDoctor(doctor: Doctor): Observable<Doctor>{

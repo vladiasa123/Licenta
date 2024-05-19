@@ -80,13 +80,15 @@ if($email){
         $token = array(
             "iss" => $issuer_claim,
             "aud" => $audience_claim,
-            "iat" => $issuedat_claim,
+            "iat" => $issuedat_claim, 
             "exp" => $expire_claim,
             "data" => array(
                 "id" => $id,
                 "firstName" => $firstName,
                 "lastName" => $lastName,
-                "userEmail" => $email
+                "userEmail" => $email,
+                "AccountType" => '1'
+               
         ));
         $jwtValue = JWT::encode($token, $secret_key, 'HS256');
         echo json_encode(
@@ -94,7 +96,9 @@ if($email){
                 "message" => "success",
                 "token" => $jwtValue,
                 "email_address" => $email,
-                "expiry" => $expire_claim
+                "expiry" => $expire_claim,
+                "AccountType" => '1',
+                "id" => $id
             ));
     } else {
         echo json_encode(array("success" => "false"));

@@ -1,4 +1,5 @@
 <?php
+require 'C:/xamppp/htdocs/Licenta/vendor/autoload.php';
 use \Firebase\JWT\JWT;
 /*
 This part down is for retrieving the data from the HTTP REQUESTS
@@ -33,10 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 $inputJSON = file_get_contents('php://input');
 $input = json_decode($inputJSON, TRUE); 
  
-
 $password = $input['password'];
-$email = $input['email'];
- 
+$email = $input['email']; 
 
 
 /*
@@ -54,63 +53,62 @@ $db_name = 'licenta';
 $db_user = 'vladiasa';
 $db_pass = 'darius2vlad';
 
+
+
 $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 
-if(mysqli_connect_error()){
-    echo mysqli_connect_error($conn);
-}else{
-    echo 'Connected successfully'; 
-}
+
 
 $sql = "SELECT id, FirstName, LastName, password, email FROM user WHERE email = ?";
 
 $stmt = mysqli_prepare($conn, $sql);
 
-
 mysqli_stmt_bind_param($stmt, 's', $email );
 mysqli_stmt_execute($stmt);
 
-mysqli_stmt_bind_result($stmt,$id, $firstName, $lastName, $hashedpassword, $email);
+mysqli_stmt_bind_result($stmt, $id, $firstName, $lastName, $hashedpassword, $email);
 mysqli_stmt_fetch($stmt);
 
 
-    if($email){
-        if (password_verify($password , $hashedpassword)) {
-            $secret_key = "bGS6lzFqvvSQ8ALbOxatm7/Vk7mLQyzqaS34Q4oR1ew=";
-            $issuer_claim = "localhost"; 
-            $audience_claim = "THE_AUDIENCE";
-            $issuedat_claim = time(); // time issued 
-            $expire_claim = $issuedat_claim + 60 * 60 * 5; 
-            $token = array(
-                "iss" => $issuer_claim,
-                "aud" => $audience_claim,
-                "iat" => $issuedat_claim,
-                "exp" => $expire_claim,
-                "data" => array(
-                    "id" => $id,
-                    "firstName" => $firstName,
-                    "lastName" => $lastName,
-                    "userEmail" => $email
+if($email){
+    if (password_verify($password , $hashedpassword)) {
+        $secret_key = "bGS6lzFqvvSQ8ALbOxatm7/Vk7mLQyzqaS34Q4oR1ew=";
+        $issuer_claim = "localhost"; 
+        $audience_claim = "THE_AUDIENCE";
+        $issuedat_claim = time(); // time issued 
+        $expire_claim = $issuedat_claim + 60 * 60 * 5; 
+        $token = array(
+            "iss" => $issuer_claim,
+            "aud" => $audience_claim,
+            "iat" => $issuedat_claim, 
+            "exp" => $expire_claim,
+            "data" => array(
+                "id" => $id,
+                "firstName" => $firstName,
+                "lastName" => $lastName,
+                "userEmail" => $email,
+                "AccountType" => '0'
+               
+        ));
+        $jwtValue = JWT::encode($token, $secret_key, 'HS256');
+        echo json_encode(
+            array(
+                "message" => "success",
+                "token" => $jwtValue,
+                "email_address" => $email,
+                "expiry" => $expire_claim,
+                "AccountType" => '0',
+                "id" => $id
             ));
-            $jwtValue = JWT::encode($token, $secret_key, 'HS256');
-            echo json_encode(
-                array(
-                    "message" => "success",
-                    "token" => $jwtValue,
-                    "email_address" => $email,
-                    "expiry" => $expire_claim
-                ));
-        } else {
-            echo json_encode(array("success" => "false"));
-        }
-      
+    } else {
+        echo json_encode(array("success" => "false"));
     }
-      else{
-            echo 'email not found';
-        }
-    
-    
-    
+  
+}
+  else{
+        echo 'email not found';
+    }
+
 
 
 

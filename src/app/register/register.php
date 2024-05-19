@@ -1,4 +1,6 @@
 <?php 
+use thiagoalessio\TesseractOCR\TesseractOCR;
+require "vendor/autoload.php";   
 /*
 This part down is for retrieving the data from the HTTP REQUESTS
 //
@@ -27,6 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
     exit(0);
 }
+
+
 
 
 $inputJSON = file_get_contents('php://input');
