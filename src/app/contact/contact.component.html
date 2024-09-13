@@ -1,48 +1,46 @@
-<div class="background">
-    <div class="container">
-      <div class="screen">
-        <div class="screen-header">
-          <div class="screen-header-left">
-            <div class="screen-header-button close"></div>
-            <div class="screen-header-button maximize"></div>
-            <div class="screen-header-button minimize"></div>
-          </div>
-          <div class="screen-header-right">
-            <div class="screen-header-ellipsis"></div>
-            <div class="screen-header-ellipsis"></div>
-            <div class="screen-header-ellipsis"></div>
-          </div>
-        </div>
-        <div class="screen-body">
-          <div class="screen-body-item left">
-            <div class="app-title">
-              <span>CONTACT</span>
-              <span>US</span>
-            </div>
-            <div class="app-contact">CONTACT INFO : +62 81 314 928 595</div>
-          </div>
-          <div class="screen-body-item">
-            <div class="app-form">
-              <div class="app-form-group">
-                <input class="app-form-control" placeholder="NAME" value="Krisantus Wanandi">
-              </div>
-              <div class="app-form-group">
-                <input class="app-form-control" placeholder="EMAIL">
-              </div>
-              <div class="app-form-group">
-                <input class="app-form-control" placeholder="CONTACT NO">
-              </div>
-              <div class="app-form-group message">
-                <input class="app-form-control" placeholder="MESSAGE">
-              </div>
-              <div class="app-form-group buttons">
-                <button class="app-form-button">CANCEL</button>
-                <button class="app-form-button">SEND</button>
-              </div>
-            </div>
-          </div>
-        </div>
+<div class="contact-container">
+  <div class="contact-form">
+    <h1>Contact Us</h1>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" [(ngModel)]="contact.name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" [(ngModel)]="contact.email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" [(ngModel)]="contact.phone" name="phone" required>
+      </div>
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" [(ngModel)]="contact.subject" name="subject" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" [(ngModel)]="contact.message" name="message" rows="5" required></textarea>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <div class="map-faq">
+    <div class="map">
+      <h2>Find Us</h2>
+      <div id="map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086706980621!2d144.95373631558518!3d-37.81720974201388!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d43f1f3e3f3%3A0xf057d25f7f9c60f9!2sGoogle!5e0!3m2!1sen!2s!4v1614675402293!5m2!1sen!2s"
+          width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy">
+        </iframe>
+      </div>
+    </div>
+    <div class="faq">
+      <h2>FAQ</h2>
+      <div class="faq-item" *ngFor="let faq of faqs" (click)="toggleAnswer(faq)">
+        <div class="faq-question">{{ faq.question }}</div>
+        <div class="faq-answer" [style.display]="faq.show ? 'block' : 'none'">{{ faq.answer }}</div>
       </div>
     </div>
   </div>
-  
+</div>

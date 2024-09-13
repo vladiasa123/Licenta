@@ -14,14 +14,12 @@ This part down is for retrieving the data from the HTTP REQUESTS
  
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');
-    header('Access-Control-Max-Age: 86400');    // cache for 1 day
+    header('Access-Control-Max-Age: 86400'); 
 }
 
-// Access-Control headers are received during OPTIONS requests
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
-        // may also be using PUT, PATCH, HEAD etc
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
     
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
@@ -75,7 +73,7 @@ if($email){
         $secret_key = "bGS6lzFqvvSQ8ALbOxatm7/Vk7mLQyzqaS34Q4oR1ew=";
         $issuer_claim = "localhost"; 
         $audience_claim = "THE_AUDIENCE";
-        $issuedat_claim = time(); // time issued 
+        $issuedat_claim = time(); 
         $expire_claim = $issuedat_claim + 60 * 60 * 5; 
         $token = array(
             "iss" => $issuer_claim,
@@ -98,7 +96,8 @@ if($email){
                 "email_address" => $email,
                 "expiry" => $expire_claim,
                 "AccountType" => '0',
-                "id" => $id
+                "id" => $id,
+                "succes" => true
             ));
     } else {
         echo json_encode(array("success" => "false"));

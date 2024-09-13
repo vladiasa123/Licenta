@@ -1,10 +1,11 @@
 export interface Doctor {
+    succes?: boolean;
     id?: number;
     password?: string;
-    firstName?: string;
-    secondName?: string;
+    FirstName?: string;
+    SecondName?: string;
     email?: string;
-    doctorType?: string;
+    DoctorType?: string;
     faculty?: string;
     image?:any;
 }

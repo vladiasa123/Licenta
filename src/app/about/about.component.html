@@ -1,0 +1,25 @@
+<div class="about-container">
+    <div class="team">
+      <h2>Meet Our Team</h2>
+      <div class="team-member" *ngFor="let doctor of doctors">
+        <h3>{{ doctor.FirstName }}</h3>
+        <p>{{ doctor.SecondName }}</p>
+        <p>{{ doctor.DoctorType }}</p>
+      </div>
+    </div>
+    <div class="timeline">
+        <h2>Our Journey</h2>
+        <div class="timeline-event" *ngFor="let event of timelineEvents">
+          <h3>{{ event.year }}</h3>
+          <p>{{ event.description }}</p>
+        </div>
+      </div>
+  </div>
+  <div class="testimonials">
+    <h2>What Our Clients Say</h2>
+    <div class="testimonial" *ngFor="let testimonial of testimonials">
+      <p>"{{ testimonial.message }}"</p>
+      <h4>- {{ testimonial.author }}</h4>
+    </div>
+  </div>
+  

@@ -36,6 +36,10 @@ import { MyWrittenFormsComponent } from './my-written-forms/my-written-forms.com
 import { Error403Component } from './error403/error403.component';
 import { ProfileManagementComponent } from './profile-management/profile-management.component';
 import { DoctorAppointmentComponent } from './doctor-appointment/doctor-appointment.component';
+import { AboutComponent } from './about/about.component';
+import { Error401Component } from './error401/error401.component';
+import { AcceptEmailComponent } from './accept-email/accept-email.component';
+import { WriteFormComponent } from './write-form/write-form.component';
 
 
 
@@ -56,7 +60,12 @@ const routes: Routes = [
   {path: 'writtenForms', component: MyWrittenFormsComponent},
   {path: 'error403', component: Error403Component},
   {path: 'profileManagement', component: ProfileManagementComponent},
-  {path: 'doctorAppointment', component: DoctorAppointmentComponent}
+  {path: 'doctorAppointment', component: DoctorAppointmentComponent},
+  {path: 'contact', component: ContactComponent},
+  {path: 'about', component: AboutComponent},
+  {path: '401Error', component: Error401Component},
+  {path:  'acceptEmail', component: AcceptEmailComponent},
+  {path: 'writingForms', component: WriteFormComponent}
 
 ];
 
@@ -80,6 +89,10 @@ const routes: Routes = [
     Error403Component,
     ProfileManagementComponent,
     DoctorAppointmentComponent,
+    AboutComponent,
+    Error401Component,
+    AcceptEmailComponent,
+    WriteFormComponent,
   ],
   imports: [
     BrowserModule,

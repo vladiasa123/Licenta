@@ -5,6 +5,4 @@ export interface appointment{
     requests: string;
     problem: string;
     DoctorId: string;
-    
-
 }

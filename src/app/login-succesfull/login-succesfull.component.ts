@@ -21,8 +21,8 @@ animationCreated(animationItem: AnimationItem): void {
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.router.navigate(['/loginDoctor']); // Navigate to your desired page
-    }, 3000); // Wait for 3 seconds (adjust as needed)
+      this.router.navigate(['/loginDoctor']); 
+    }, 3000); 
   }
 
 }

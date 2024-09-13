@@ -15,7 +15,6 @@
         <h2>Patient Information</h2>
         <div>
         <p><strong>Name: {{patient?.name}}</strong></p>
-        <p><strong>Age: </strong></p>
         <p><strong>Gender: {{patient?.gender}}</strong></p>
       </div>
       </div>
@@ -47,8 +46,8 @@
             <td>{{patient?.notes}}</td>
           </tr>
           <tr>
-            <button type="submit" class="deleteButton" (click)="deleteChart(patient!.id!)">Delete Chart</button>
-            <button type="submit" class="updateButton" routerLink="/medicalForm"  [queryParams]="{id: patient!.id}">Update Chart</button>
+            <button type="submit" class="deleteButton" *ngIf="loggedIn == 1" (click)="deleteChart(patient!.id!)">Delete Chart</button>
+            <button type="submit" class="updateButton" *ngIf="loggedIn == 1" routerLink="/medicalForm"  [queryParams]="{id: patient!.id}">Update Chart</button>
           </tr>
         </tbody>
       </table>

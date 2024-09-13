@@ -43,11 +43,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Adjust if needed */
+    height: 100vh;
   }
 
   .doctors-container {
-    display: flex; /* Or any other desired spacing */
+    display: flex; 
     flex-wrap: wrap;
     justify-content: center;
   }

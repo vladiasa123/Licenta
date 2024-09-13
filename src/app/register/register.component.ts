@@ -5,7 +5,7 @@ import {User} from '../interface/user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-
+import { DoctorService } from '../service/doctor.service';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent {
   clicked: boolean = false;
   clicked1: boolean = false;
+  file: any;
 
   navigateToRegister() {
     this.router.navigate(['/register-doctor']);
@@ -88,7 +89,8 @@ export class RegisterComponent {
 
     };
     this.userService.createUser(user).subscribe(users => console.table(users));
-  }
+  } 
+
 
 
 }

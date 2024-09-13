@@ -26,6 +26,7 @@ h1 {
     color: black;
     transition: 0.2s;
     position: relative; 
+    height: 50px;
     
 }
 

@@ -28,8 +28,6 @@ export class RegisterDoctorComponent {
 
   }
 
-
-
   show(){
     Swal.fire({
       title: "Good job!",
@@ -41,7 +39,6 @@ export class RegisterDoctorComponent {
     });
   }
 
- 
 
  getDefaultFile() {
     return new File([''], 'filename.txt');
@@ -52,11 +49,6 @@ export class RegisterDoctorComponent {
  }
 isUploaded = false;
  file = this.getDefaultFile();
-
-
-
-
-
 
 
   ngOnInit(): void{
@@ -72,8 +64,6 @@ isUploaded = false;
       'faculty' : ['', [Validators.required]],
       'doctorType' : ['', [Validators.required]],
       'image' : ['', [Validators.required]]
-
-    
     });
   }
 
@@ -114,17 +104,15 @@ navigateTologin() {
     if(event.target.files.length > 0){
       this.file = event.target.files[0];
       this.isUploaded = true;
+      console.log(this.file);
+      
     }
-
-
   }
 
   dismissFile(){
     this.file = this.getDefaultFile();
     this.isUploaded = false;
   }
-
-
 
 
   }

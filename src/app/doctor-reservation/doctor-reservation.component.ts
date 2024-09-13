@@ -29,6 +29,7 @@ export class DoctorReservationComponent {
     this.doctorService.getEmployees(doctorType).subscribe(doctors => {
       this.doctors = doctors;
       const doctorId = doctors.map(doctor => doctor.id);
+      const doctorEmail = doctors.map(doctor => doctor.email)
       console.log(doctors);
     });
     

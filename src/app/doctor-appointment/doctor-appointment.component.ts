@@ -7,17 +7,21 @@ import { User } from '../interface/user';
 import { UserService } from '../service/user.service';
 import { appointment } from '../interface/appointment';
 import { AppointmentService } from '../service/appointment.service';
-
+import { jwtDecode } from 'jwt-decode';
+import { DecodedToken } from '../interface/DecodedToken';
+import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-doctor-appointment',
   templateUrl: './doctor-appointment.component.html',
   styleUrl: './doctor-appointment.component.css'
 })
  export class DoctorAppointmentComponent {
-
+  acces = false;
   public constructor(private route: ActivatedRoute,
     private appointmentService: AppointmentService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public auth: AuthService,
+    public router: Router
   ){
     
   }
@@ -33,6 +37,7 @@ import { AppointmentService } from '../service/appointment.service';
     console.log(this.queryParamsId);
     })
     this.initForm();
+    this.checkToken();  
   }
 
   private initForm(){
@@ -59,6 +64,26 @@ import { AppointmentService } from '../service/appointment.service';
     this.appointmentService.sendForm(appointment).subscribe(appointment => console.table(appointment));
   }
 
+
+  checkToken(): void {
+    const token = localStorage.getItem('token');
+    if (token == null) {
+      console.log('Token does not exist');
+      this.router.navigate(['/login']);
+    } else {
+      try {
+        const decodedToken = jwtDecode(token) as DecodedToken;
+        console.log(decodedToken);
+        const accountType = decodedToken.data.AccountType;
+        console.log('Account Type:', accountType);
+        if (accountType == 1 || accountType == 0) {
+          this.acces = true;
+        }
+      } catch (error) {
+        this.router.navigate(['/login']);
+      }
+    }
+  }
  
 
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   faGithub,
   faYoutube,
@@ -22,7 +23,7 @@ export class HomeComponent {
   isHovered3: boolean = false;
   hasDataInLocalStorage: boolean = false;
 
-  constructor(){
+  constructor(private router : Router){
 if(localStorage.getItem('loggedInUser') != null){
   this.loggedIn = 1;
 }
@@ -67,5 +68,7 @@ if(localStorage.getItem('loggedInUser') != null){
     },
   ];
 
-  
+  public transport(){
+  this.router.navigate(['doctor-reservation'])
+  }
 }
