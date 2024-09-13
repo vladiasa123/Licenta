@@ -1,45 +1,50 @@
- <div class="body">
+<div class="body">
   <nav class="navigationBar" *ngIf="showHeader">
-    <div class="dropdown" *ngIf="!loggedIn">
+    <div class="dropdown" *ngIf="loggedIn == 1">
       <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My account</button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item "href="/writtenForms">My forms</a>
-        <a  class="dropdown-item" href="profileManagement">My Profile</a>
-          <button (click)="confirmDelete()" class="logoutbutton">Log Out</button>
+        <a class="dropdown-item" href="/writtenForms">My forms</a>
+        <a class="dropdown-item" href="profileManagement">My Profile</a>
+        <a class="dropdown-item" href="/writingForms">Write a new form</a>
+        <button (click)="confirmDelete()" class="logoutbutton">Log Out</button>
       </div>
     </div>
-    <div class="Register" *ngIf="loggedIn">
-      <button routerLink="login" class="RegistrationButton">
-        Sign up
-      </button>
+    <div class="dropdown" *ngIf="loggedIn2 == 1">
+      <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My account</button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/medicalChart">My medical chart</a>
+        <a class="dropdown-item" href="profileManagement">My Profile</a>
+        <button (click)="confirmDelete()" class="logoutbutton">Log Out</button>
+      </div>
     </div>
+    <div class="Register" *ngIf="!loggedIn && !loggedIn2">
+      <button routerLink="login" class="RegistrationButton">Sign up</button>
+    </div>
+    
     <img src="assets/LOGO.png" class="logo" />
     <div class="itemMenu">
       <button routerLink="home" class="homeButton">Home</button>
-      <button class="contactButton">Contact</button>
-      <button class="aboutButton">About</button>
+      <button routerLink="contact" class="contactButton">Contact</button>
+      <button routerLink="about" class="aboutButton">About</button>
     </div>
   </nav>
 </div>
+
 <router-outlet></router-outlet>
-<footer *ngIf="showFooter">
+
+<div class="content-wrapper">
+</div>
+<div *ngIf="showFooter" class="footer">
   <div class="greyBorder">
     <button class="gitButton"><fa-icon [icon]="git"></fa-icon></button>
     <button class="xButton"><fa-icon [icon]="x"></fa-icon></button>
-    <button class="linkedinButton">
-      <fa-icon [icon]="linkedin"></fa-icon>
-    </button>
-    <button class="facebookButton">
-      <fa-icon [icon]="facebook"></fa-icon>
-    </button>
+    <button class="linkedinButton"><fa-icon [icon]="linkedin"></fa-icon></button>
+    <button class="facebookButton"><fa-icon [icon]="facebook"></fa-icon></button>
   </div>
   <div class="wholeFooter">
     <div class="secondBox">
-      <h1>
-        The new medical website <br />
-        available 24/7®
-      </h1>
+      <h1>The new medical website <br />available 24/7®</h1>
       <h3>Romania</h3>
     </div>
   </div>
-</footer>
+</div>

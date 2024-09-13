@@ -14,7 +14,6 @@ private api2= 'http://localhost/Licenta/src/app/login';
 private api3 = 'http://localhost/Licenta/src/app/profile-management';
 private api4 = 'http://localhost/Licenta/src/app/doctor-appointment';
 
-
   constructor(private http: HttpClient) { }
 
 
@@ -25,8 +24,6 @@ private api4 = 'http://localhost/Licenta/src/app/doctor-appointment';
   loginUser(user: User): Observable<User>{
     return this.http.post<User>(`${this.api2}/login.php`, user);
   } 
-
-  
 
   getUser(): Observable<User>{
     return this.http.get<User>(`${this.api3}/getUser.php`)

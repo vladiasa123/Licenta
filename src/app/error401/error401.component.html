@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Appointment Notification</title>
+    <style>
+        .image{
+    border: 2px black solid;
+    width: 1600px;
+    height: 2300px;
+}
+
+.doctorImage{
+    width: 1500px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.h1{
+    text-align: center;
+    font: Satoshi;
+    font-size: 100px;
+}
+
+h3{
+    text-align: center;
+    font-size: 80px;
+    padding-top: 80px;
+}
+
+h4{
+    text-align: center;
+    font-size: 70px;
+    padding-top: 80px ;
+}
+
+.buttonDiv{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 100px;
+}
+
+
+
+.yes{
+    width: 500px;
+    height: 200px;
+    font-size: 50px;
+    margin-left: 200px;
+    border: 0px;
+    background-color: 	#AAFF00;
+    border-radius: 30px;
+}
+
+.no{
+    width: 500px;
+    height: 200px; 
+    font-size: 50px;
+    margin-right: 200px;
+    border: 0px;
+    background-color: #EE4B2B;
+    border-radius: 30px;
+}
+    </style>
+</head>
+<body>
+    <div class="image">
+        <img src="assets/portrait.png" class="doctorImage" alt="Doctor's Portrait"/>
+        <h1 class="h1">You received a new appointment</h1>
+        <h3 class="h3">..... just made an appointment with you</h3>
+        <h4 class="h4">Do you wish to accept?</h4> 
+        <div class="buttonDiv">
+            <button class="yes">Yes</button>
+            <button class="no">No</button>
+        </div>
+    </div>
+</body>
+</html>

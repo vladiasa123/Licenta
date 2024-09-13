@@ -1,24 +1,14 @@
 <?php 
 require 'C:/xamppp/htdocs/Licenta/vendor/autoload.php';
 
-/*
-This part down is for retrieving the data from the HTTP REQUESTS
-//
-///
-/////
-////////
-*/
-
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');
-    header('Access-Control-Max-Age: 86400');    // cache for 1 day
+    header('Access-Control-Max-Age: 86400');
 }
 
-// Access-Control headers are received during OPTIONS requests
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'])) {
-        // may also be using PUT, PATCH, HEAD etc
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
     }
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
@@ -27,53 +17,76 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit(0);
 }
 
-$inputJSON = file_get_contents('php://input');
-$input = json_decode($inputJSON, TRUE); 
+header('Content-Type: application/json');
 
-$FirstName = $_POST['firstName'];
-$SecondName = $_POST['secondName'];
-$password = $_POST['password'];
-$DoctorType = $_POST['doctorType'];
-$faculty = $_POST['faculty'];
+$response = [];
+
+$FirstName = $_POST['firstName'] ?? '';
+$SecondName = $_POST['secondName'] ?? '';
+$password = $_POST['password'] ?? '';
+$DoctorType = $_POST['doctorType'] ?? '';
+$faculty = $_POST['faculty'] ?? '';
+$email = $_POST['email'] ?? '';
+$image = $_FILES['image'] ?? null;
+
+if ($image && $image['error'] === UPLOAD_ERR_OK) {
+    $target_save = $_SERVER['DOCUMENT_ROOT'] . "/Licenta/src/app/uploads/";  
+    $target_file = $target_save . $FirstName . "_" . basename($image["name"]);
+    if (!move_uploaded_file($image["tmp_name"], $target_file)) {
+        $response['status'] = 'error';
+        $response['message'] = 'Failed to move uploaded file.';
+        echo json_encode($response);
+        exit;
+    }
+} else {
+    $response['status'] = 'error';
+    $response['message'] = 'File upload error: ';
+    switch ($image['error']) {
+        case UPLOAD_ERR_INI_SIZE:
+        case UPLOAD_ERR_FORM_SIZE:
+            $response['message'] .= 'File too large.';
+            break;
+        case UPLOAD_ERR_PARTIAL:
+            $response['message'] .= 'File upload was only partially completed.';
+            break;
+        case UPLOAD_ERR_NO_FILE:
+            $response['message'] .= 'No file was uploaded.';
+            break;
+        case UPLOAD_ERR_NO_TMP_DIR:
+            $response['message'] .= 'Missing a temporary folder.';
+            break;
+        case UPLOAD_ERR_CANT_WRITE:
+            $response['message'] .= 'Failed to write file to disk.';
+            break;
+        case UPLOAD_ERR_EXTENSION:
+            $response['message'] .= 'A PHP extension stopped the file upload.';
+            break;
+        default:
+            $response['message'] .= 'Unknown error.';
+            break;
+    }
+    echo json_encode($response);
+    exit;
+}
+
 $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-$email = $_POST['email'];
-$image = $_FILES['image'];
 
 use thiagoalessio\TesseractOCR\TesseractOCR;
-
-
-$text = (new TesseractOCR('buletin.jpg'))->lang('ron')->run();
+$text = (new TesseractOCR($target_file))->lang('ron')->run();
 
 $idrouPosition = strpos($text, "IDROU");
 
-
 if ($idrouPosition !== false) {
-
     $extractedText = substr($text, $idrouPosition + strlen("IDROU"));
-
-    $extractedText = trim($extractedText);
-
-    $extractedText = strip_tags($extractedText);
+    $extractedText = trim(strip_tags($extractedText));
 } else {
-
-    echo "No match found for 'IDROU'.";
+    $response['status'] = 'error';
+    $response['message'] = "No match found for 'IDROU'.";
+    echo json_encode($response);
+    exit;
 }
-$target_save = $_SERVER['DOCUMENT_ROOT'] . "/Licenta/src/app/uploads/";  
-$target_dir = "http://localhost/Licenta/src/app/uploads/"; 
-$target_file = $target_dir . $FirstName . "_" . basename($_FILES["image"]["name"]);
-$target_sql= $target_save . $FirstName . "_" . basename($_FILES["image"]["name"]);
-move_uploaded_file($_FILES["image"]["tmp_name"], $target_sql);
 
-$savedFile = $target_file;
-echo $savedFile;
-
-/*
-FROM THIS DOWN IS THE DATABASE RELATED STUFF
-////
-///////
-////////
-/////////////
-*/
+$savedFile = "http://localhost/Licenta/src/app/uploads/" . $FirstName . "_" . basename($image["name"]);
 
 $db_host = 'localhost';
 $db_name = 'licenta';
@@ -83,13 +96,13 @@ $db_pass = 'darius2vlad';
 $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 
 if (mysqli_connect_error()) {
-    echo mysqli_connect_error($conn);
-} else {
-    echo 'Connected successfully';
+    $response['status'] = 'error';
+    $response['message'] = 'Database connection error: ' . mysqli_connect_error();
+    echo json_encode($response);
+    exit;
 }
 
 if (isset($extractedText) && isset($FirstName)) {
-    
     $extractedText = trim($extractedText);
     $FirstName = trim($FirstName);
     $extractedTextLower = strtolower($extractedText);
@@ -104,43 +117,33 @@ if (isset($extractedText) && isset($FirstName)) {
         $emailExists = mysqli_stmt_num_rows($emailExistsStmt) > 0;
 
         if ($emailExists) {
-            echo "Email already exists.";
+            $response['status'] = 'error';
+            $response['message'] = 'Email already exists.';
         } else {
-            $SQL = "INSERT INTO doctors (FirstName, LastName,email, DoctorType, faculty, password, image)
-            VALUES (?, ?, ? ,?, ?,?, ?)";
-
+            $SQL = "INSERT INTO doctors (FirstName, LastName, email, DoctorType, faculty, password, image) VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $SQL);
-
-            mysqli_stmt_bind_param($stmt, 'sssssss', $FirstName, $SecondName,$email, $DoctorType, $faculty, $hashed_password, $target_file);
-
+            mysqli_stmt_bind_param($stmt, 'sssssss', $FirstName, $SecondName, $email, $DoctorType, $faculty, $hashed_password, $savedFile);
             $results = mysqli_stmt_execute($stmt);
 
             if (!$results) {
-                echo mysqli_stmt_error($stmt);
+                $response['status'] = 'error';
+                $response['message'] = mysqli_stmt_error($stmt);
             } else {
-                echo 'Records inserted successfully';
+                $response['status'] = 'success';
+                $response['message'] = 'Records inserted successfully';
+                $response['message'] = 'Id check completed succesfully';
             }
         }
 
         mysqli_close($conn);
     } else {
-        echo 'First Name doesn\'t match';
-        echo $FirstName . $extractedText;
+        $response['status'] = 'error';
+        $response['message'] = 'First Name doesn\'t match. Expected: ' . $FirstName . ', Found: ' . $extractedText;
     }
 } else {
-    echo 'Variables $extractedText and $FirstName are not set';
+    $response['status'] = 'error';
+    $response['message'] = 'Variables $extractedText and $FirstName are not set';
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+echo json_encode($response);
 ?>

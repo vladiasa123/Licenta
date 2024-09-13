@@ -1,13 +1,13 @@
-.card-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .firstCut {
   display: flex;
   position: relative;
-  background: rgb(2, 0, 36);
   background: linear-gradient(
     90deg,
     rgba(2, 0, 36, 1) 0%,
@@ -16,12 +16,10 @@
   );
   width: 100%;
   height: 200px;
-  top: 100;
-  left: 0;
-  right: 200;
   text-align: center;
   align-items: center;
   justify-content: center;
+  z-index: 0; 
 }
 
 .firstTitle {
@@ -34,38 +32,17 @@
   width: 250px;
   top: -110px;
   left: calc(50% - 600px);
-
   -webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
+  z-index: 3; 
 }
 
-.strongText {
-  font-family: Satoshi;
-}
-
-.subtitle {
-  font-size: 20px;
-}
-
-.containerUp {
-  pointer-events: none;
-}
-
-
-.first3DModelRow{
-  display: flex;
-  flex-direction: row-reverse;
-}
-
-.first3DModelRow img{
-  width: 30% ;
-  height: 100%;
-  margin-top: 100px;
-}
-
-.ModelImage{
-  display: flex;
-  margin-left: auto;
+.clinicVideo {
+  display: block;
+  margin: 20px auto;
+  width: 100%;
+  height: auto;
+  border-image: fill 0 linear-gradient(#0001, #000);
 }
 
 .container {
@@ -75,43 +52,272 @@
   align-items: center;
 }
 
-.container .glass {
-  position: relative;
-  width: 180px;
-  height: 200px;
-  background: linear-gradient(#70000222, transparent);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 25px 25px rgba(0, 0, 0, 0.25);
+.imageContainer {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.5s;
-  border-radius: 10px;
-  margin: 0 -45px;
-  backdrop-filter: blur(10px);
-  transform: rotate(calc(var(--r) * 1deg));
+  flex-direction: row; 
+ float: right;
+ padding-right: 150px;
+  gap: 20px;
+  padding-top: 250px;
 }
 
-.container:hover .glass {
-  transform: rotate(0deg);
-  margin: 0 10px;
-
+.orange {
+  color: #ff7a01;
 }
 
-.container .glass::before {
-  content: attr(data-text);
-  position: absolute;
-  bottom: 0;
+.form-container {
+  max-width: 700px;
+  margin: 30px;
+  background-color: #001925;
+  padding: 30px;
+  border-left: 5px solid #ff7a01;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+}
+
+.heading {
+  display: block;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.form-container .form .input {
+  color: #87a4b6;
   width: 100%;
-  height: 40px;
-  background: rgba(112, 0, 2, 0.02);
+  background-color: #002733;
+  border: none;
+  outline: none;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+  border-left: 1px solid transparent;
+}
+
+.form-container .form .input:focus {
+  border-left: 5px solid #ff7a01;
+}
+
+.form-container .form .textarea {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  background-color: #013747;
+  color: #ff7a01;
+  font-weight: bold;
+  resize: none;
+  max-height: 150px;
+  margin-bottom: 20px;
+  border-left: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.form-container .form .textarea:focus {
+  border-left: 5px solid #ff7a01;
+}
+
+.form-container .form .button-container {
+  display: flex;
+  gap: 10px;
+}
+
+.form-container .form .button-container .send-button {
+  flex-basis: 70%;
+  background: #ff7a01;
+  padding: 10px;
+  color: #001925;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.form-container .form .button-container .send-button:hover {
+  background: transparent;
+  border: 1px solid #ff7a01;
+  color: #ff7a01;
+}
+
+.form-container .form .button-container .reset-button-container {
+  filter: drop-shadow(1px 1px 0px #ff7a01);
+  flex-basis: 30%;
+}
+
+.form-container .form .button-container .reset-button-container .reset-button {
+  position: relative;
+  text-align: center;
+  padding: 10px;
+  color: #ff7a01;
+  font-weight: bold;
+  background: #001925;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+  transition: all 0.2s ease-in-out;
+}
+
+.form-container .form .button-container .reset-button-container .reset-button:hover {
+  background: #ff7a01;
+  color: #001925;
+}
+.imageContainer img {
+  width: 300px;
+}
+
+
+.allCards {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #700002;
+  margin-left: auto;
+  margin-top: -150px;
 }
-.container .glass svg {
-  font-size: 2.5em;
-  fill: #700002;
+
+.card1 {
+  width: 190px;
+  height: 254px;
+  border-radius: 20px;
+  background: #f5f5f5;
+  position: relative;
+  padding: 1.8rem;
+  border: 2px solid #c3c6ce;
+  transition: 0.5s ease-out;
+  overflow: visible;
+  margin: 40px;
+  transition: all 1s ease;
+  background-size: 0%;
+  background-position: center;
+  background-repeat: no-repeat;
 }
+
+.card-details {
+  color: black;
+  height: 100%;
+  gap: .5em;
+  display: flex;
+  place-content: center;
+}
+
+.card-button {
+  transform: translate(-50%, 125%);
+  width: 60%;
+  border-radius: 1rem;
+  border: none;
+  background-color: #008bf8;
+  color: #fff;
+  font-size: 1rem;
+  padding: .5rem 1rem;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  opacity: 0;
+}
+
+.text-body {
+  color: rgb(134, 134, 134);
+}
+
+.text-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.card1:hover {
+  border-color: #008bf8;
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+
+.card1:hover .card-button {
+  transform: translate(-50%, 50%);
+  opacity: 1;
+}
+
+.card1:hover {
+  background-image: url("doctorHome.png");
+  background-size: 100%;
+  transition: background-size 1s ease;
+}
+
+
+.card2 {
+  width: 190px;
+  height: 254px;
+  border-radius: 20px;
+  background: #f5f5f5;
+  position: relative;
+  padding: 1.8rem;
+  border: 2px solid #c3c6ce;
+  transition: 0.5s ease-out;
+  overflow: visible;
+  margin: 40px;
+  transition: all 1s ease;
+  background-size: 0%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.card2:hover {
+  border-color: #008bf8;
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+
+.card2:hover .card-button {
+  transform: translate(-50%, 50%);
+  opacity: 1;
+}
+
+.card2:hover {
+  background-image: url("news.png");
+  background-size: 100%;
+  transition: background-size 1s ease;
+}
+
+
+.card3 {
+  width: 190px;
+  height: 254px;
+  border-radius: 20px;
+  background: #f5f5f5;
+  position: relative;
+  padding: 1.8rem;
+  border: 2px solid #c3c6ce;
+  transition: 0.5s ease-out;
+  overflow: visible;
+  margin: 40px;
+  transition: all 1s ease;
+  background-size: 0%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.card3:hover {
+  border-color: #008bf8;
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+
+.card3:hover .card-button {
+  transform: translate(-50%, 50%);
+  opacity: 1;
+}
+
+.card3:hover {
+  background-image: url("doctorHome.png");
+  background-size: 100%;
+  transition: background-size 1s ease;
+}
+
+
+
+
+
+
+
+
+
+
+ 
+
+
 

@@ -3,13 +3,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* This will make the container take up the full height of the viewport */
+    height: 100vh;
 }
 
 h1 {
     color: red;
     font-size: 3em;
-    margin-bottom: 20px; /* Add some space below the heading */
+    margin-bottom: 20px;
 }
 
 p {
@@ -25,6 +25,6 @@ button {
     cursor: pointer;
 }
 
-button:hover 
-    background-color: #red;
+button:hover {
+    background-color: red;
 }

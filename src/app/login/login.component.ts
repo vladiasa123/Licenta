@@ -16,7 +16,6 @@ export class LoginComponent {
 
   
   loginForm!: FormGroup;
-
   constructor(private userService: UserService,
     private readonly formBuilder: FormBuilder,
     private authService: AuthService,
@@ -24,7 +23,6 @@ export class LoginComponent {
   ){
 
   }
-
   ngOnInit(): void{
     this.initForm();
   }
@@ -40,18 +38,35 @@ export class LoginComponent {
 
 
   success() {
-    Swal.fire({
-      title: "Good job!",
-      text: "You successfully logged in!",
-      icon: "success"
-    }).then(() => {
-      console.log("Redirecting...");
-      this.router.navigate(['/home']).then(() => {
-        setTimeout(() => {
-          console.log("Reloading...");
-          window.location.reload();
-        }, 500); 
-      }); 
+    const user: User = {
+      email: this.loginForm.get('email')?.value,
+      password: this.loginForm.get('password')?.value,
+      succes: this.loginForm.get('succes')?.value
+    };
+    this.authService.loginUser(user).subscribe(user => {
+      if(user.succes === true){
+        Swal.fire({
+          title: "Good job!",
+          text: "You successfully logged in!",
+          icon: "success"
+        }).then(() => {
+          console.log("Redirecting...");
+          this.router.navigate(['/home']).then(() => {
+            setTimeout(() => {
+              console.log("Reloading...");
+              window.location.reload();
+            }, 500); 
+          }); 
+        });
+      }
+      else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Email or password incorrect",
+          footer: '<a href="#">Why do I have this issue?</a>'
+        });
+      }
     });
   }
 

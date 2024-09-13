@@ -4,9 +4,10 @@ import { Patient } from '../interface/patient';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { jwtDecode } from 'jwt-decode';
-import { ActivatedRoute, Params, Route } from '@angular/router';
+import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { NumberFormatStyle } from '@angular/common';
 import { query } from '@angular/animations';
+import { DecodedToken } from '../interface/DecodedToken';
 
 @Component({
   selector: 'app-medical-chart',
@@ -14,12 +15,14 @@ import { query } from '@angular/animations';
   styleUrl: './medical-chart.component.css'
 })
 export class MedicalChartComponent {
-  accountType: string | undefined; // Variable to store AccountType
+  accountType: string | undefined; 
   activatedRoute: any;
  public name: string = '';
  public queryParamsId: string | null = null;
+  loggedIn= 0;
+  loggedIn2 = 1;
 
-  constructor(private patientService: PatientService, private authService: AuthService, private route: ActivatedRoute) {}
+  constructor(private patientService: PatientService, private authService: AuthService, private route: ActivatedRoute, public router: Router) {}
   
   patient: Patient | undefined;
   queryParamsStatus ='';
@@ -29,7 +32,9 @@ export class MedicalChartComponent {
       this.route.queryParamMap.subscribe(queryParam => {
         this.queryParamsId = queryParam.get('id');
       console.log(this.queryParamsId);
-      })
+      this.checkToken()
+      }
+    )
     
 this.decodeToken((accountType: string | undefined) => {
       if (accountType === "0") {
@@ -87,5 +92,27 @@ this.decodeToken((accountType: string | undefined) => {
       console.log('deleted successfully');
       this.loadMedicalChart();  
     });
+  }
+  
+  checkToken(): void {
+    const token = localStorage.getItem('token');
+    if (token == null) {
+      console.log('Token does not exist');
+    } else {
+      try {
+        const decodedToken = jwtDecode(token) as DecodedToken;
+        console.log(decodedToken);
+        const accountType = decodedToken.data.AccountType;
+        console.log('Account Type:', accountType);
+        if (accountType == 1) {
+          this.loggedIn = 1;
+        } else if (accountType == 0) {
+          this.loggedIn2 = 1;
+        }
+      } catch (error) {
+        console.error('Invalid token', error);
+        
+      }
+    }
   }
 }

@@ -35,18 +35,35 @@ export class LoginDoctorComponent {
   }
 
   success() {
-    Swal.fire({
-      title: "Good job!",
-      text: "You successfully logged in!",
-      icon: "success"
-    }).then(() => {
-      console.log("Redirecting...");
-      this.router.navigate(['/home']).then(() => {
-        setTimeout(() => {
-          console.log("Reloading...");
-          window.location.reload();
-        }, 500); 
-      }); 
+    const doctor: Doctor = {
+      email: this.loginDoctorForm.get('email')?.value,
+      password: this.loginDoctorForm.get('password')?.value,
+      succes: this.loginDoctorForm.get('succes')?.value
+    };
+    this.authService.loginDoctor(doctor).subscribe(doctor => {
+      if(doctor.succes === true){
+        Swal.fire({
+          title: "Good job!",
+          text: "You successfully logged in!",
+          icon: "success"
+        }).then(() => {
+          console.log("Redirecting...");
+          this.router.navigate(['/home']).then(() => {
+            setTimeout(() => {
+              console.log("Reloading...");
+              window.location.reload();
+            }, 500); 
+          }); 
+        });
+      }
+      else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Email or password incorrect",
+          footer: '<a href="#">Why do I have this issue?</a>'
+        });
+      }
     });
   }
 
