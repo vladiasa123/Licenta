@@ -46,7 +46,7 @@ FROM THIS DOWN IS THE DATABASE RELATED STUFF
 $db_host = 'localhost';
 $db_name = 'licenta';
 $db_user = 'vladiasa';
-$db_pass = 'darius2vlad';
+$db_pass = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     

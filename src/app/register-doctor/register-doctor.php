@@ -91,7 +91,7 @@ $savedFile = "http://localhost/Licenta/src/app/uploads/" . $FirstName . "_" . ba
 $db_host = 'localhost';
 $db_name = 'licenta';
 $db_user = 'vladiasa';
-$db_pass = 'darius2vlad';
+$db_pass = '';
 
 $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 
